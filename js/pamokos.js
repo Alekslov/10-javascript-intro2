@@ -131,11 +131,56 @@ function skaitmenuKiekisSkaiciuje (skaic) {
     if ( typeof skaic !== 'number' ) {
         return "Pateikta netinkamo tipo reiksme." ;
     }
+    if (''+skaic === 'NaN') {
+        return "Pateikta netinkamo tipo reiksme." ;
+    }
     skaic = skaic + '';
     let kiekis = skaic.length;
-    
-    return kiekis;
+    return kiekis;   
 }
 
 
 console.log(skaitmenuKiekisSkaiciuje(5), ' -> 1');
+console.log( skaitmenuKiekisSkaiciuje( 781 ), ' -> 3');
+console.log( skaitmenuKiekisSkaiciuje( 37060123456 ),' -> 11' );
+console.log( skaitmenuKiekisSkaiciuje( true ), ' -> Pateikta netinkamo tipo reikšmė.' );
+console.log( skaitmenuKiekisSkaiciuje( 'asd' ), ' -> Pateikta netinkamo tipo reikšmė.' );
+console.log( skaitmenuKiekisSkaiciuje( NaN ), ' -> Pateikta netinkamo tipo reikšmė.' );
+
+console.log('------------');
+
+function didziausiasSkaiciusSarase(sarasas) {
+    if (typeof sarasas !== 'object') {
+        return 'Pateikta netinkamo tipo reikšmė.';
+    }
+    const size = sarasas.length;
+
+    if (size === 0) {
+        return 'Pateiktas sąrašas negali būti tuščias.';
+    }
+    let bigNum = sarasas[0];
+    for (let i = 0; i < size; i++) {
+        const skaicius = sarasas[i];
+        if (typeof skaicius !== 'number') {
+            continue;
+        }
+        if (bigNum < sarasas[i]) {
+            bigNum = sarasas[i];
+        }
+    
+    }
+    
+    return bigNum;
+}
+
+
+
+console.log( didziausiasSkaiciusSarase([ 1 ]), ' -> 1' );
+console.log( didziausiasSkaiciusSarase( [ 1, 2, 3 ] ), ' -> 3' );
+console.log( didziausiasSkaiciusSarase( [ -5, 78, 14, 0, 18 ] ), ' -> 78' );
+console.log( didziausiasSkaiciusSarase( [ 69, 69, 69, 69, 66 ] ), ' -> 69' );
+console.log( didziausiasSkaiciusSarase( [ -1, -2, -3, -4, -5, -6, -7, -8 ] ), ' -> -1' );
+
+console.log( didziausiasSkaiciusSarase( "pomidoras" ), ' -> Pateikta netinkamo tipo reikšmė.' );
+console.log( didziausiasSkaiciusSarase( [] ), ' -> Pateiktas sarasas negali buti tuscias.' );
+
